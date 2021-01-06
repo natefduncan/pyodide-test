@@ -1,0 +1,26 @@
+services:
+    web:
+      build: .
+      command: ["python", "app.py"]
+      volumes:
+          - .:/app
+      ports:
+          - "5000:5000"
+      links:
+          - db
+    db:
+      image: mariadb
+      restart: always
+      environment:
+        MYSQL_ROOT_PASSWORD: password
+        MYSQL_DATABASE: app
+      logging:
+        driver: none 
+
+    adminer:
+      image: adminer
+      restart: always
+      ports:
+        - 8080:8080
+      logging:
+        driver: none

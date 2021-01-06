@@ -1,0 +1,33 @@
+{% extends 'user_base.html' %}
+
+{% block title %} Home {% endblock %}
+
+{% block body %}
+<!--Side Menu-->
+<div class="columns is-centered">
+    <div class="column is-one-fifth">
+        <aside class="menu">
+        <p class="menu-label">
+            General
+        </p>
+        <ul class="menu-list">
+            <li><a href="{{url_for('core.dashboard')}}">Dashboard</a></li>
+            <li><a href="{{url_for('core.orders')}}">Orders</a></li>
+            <li><a href="{{url_for('core.maps')}}">Maps</a></li>
+        </ul>
+        <p class="menu-label">
+            Subscription
+        </p>
+        <ul class="menu-list">
+            <li><a href="#">Subscription Information</a></li>
+            <li><a href="#">Billing</a></li>
+        </ul>
+        </aside>
+    </div>
+    
+    <div class="column">
+        <!--Body Block HERE-->
+    </div>
+</div>
+
+{% endblock %}

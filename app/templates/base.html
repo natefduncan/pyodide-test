@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <!--Title Block-->
+        <title>{% block title %}{% endblock %}</title>
+
+        <!--JS Bundle-->
+        <script src="{{url_for('static', filename='bundle.min.js')}}" type="text/css"></script>
+
+        <!--CSS Bundle-->
+        <link rel="stylesheet" href="{{url_for('static', filename='bundle.min.css')}}" type="text/css"/>
+
+        <!--Header Block-->
+        {% block header %}{% endblock %} 
+    </head>
+    <body>
+        <div class="section">
+            <!--Messages-->
+            {% if message %}
+                <article class="message is-info">
+                <div class="message-body">
+                    <p>{{message}}</p>
+                </div>
+                </article>
+            {% endif %}   
+
+            <!--Body Block-->
+            {% block body %}{% endblock %}
+        </div>
+
+    </body>
+</html>
