@@ -1,33 +1,42 @@
-{% extends 'user_base.html' %}
+{% extends 'base.html' %}
 
 {% block title %} Home {% endblock %}
 
-{% block body %}
-<!--Side Menu-->
-<div class="columns is-centered">
-    <div class="column is-one-fifth">
-        <aside class="menu">
-        <p class="menu-label">
-            General
-        </p>
-        <ul class="menu-list">
-            <li><a href="{{url_for('core.dashboard')}}">Dashboard</a></li>
-            <li><a href="{{url_for('core.orders')}}">Orders</a></li>
-            <li><a href="{{url_for('core.maps')}}">Maps</a></li>
-        </ul>
-        <p class="menu-label">
-            Subscription
-        </p>
-        <ul class="menu-list">
-            <li><a href="#">Subscription Information</a></li>
-            <li><a href="#">Billing</a></li>
-        </ul>
-        </aside>
-    </div>
-    
-    <div class="column">
-        <!--Body Block HERE-->
-    </div>
-</div>
+{% block header %}
+<script type="text/javascript">
+    // set the pyodide files URL (packages.json, pyodide.asm.data etc)
+    window.languagePluginUrl = 'https://cdn.jsdelivr.net/pyodide/v0.16.1/full/';
+</script>
+<script src="https://cdn.jsdelivr.net/pyodide/v0.16.1/full/pyodide.js"></script>
+{% endblock %}
 
+{% block body %}
+    <p>You can execute any Python code. Just enter something in the box below and click the button.</p>
+    <input id='code' value='sum([1, 2, 3, 4, 5])'>
+    <button onclick='evaluatePython()'>Run</button>
+    <br>
+    <br>
+    <div>
+        Output:
+    </div>
+    <textarea id='output' style='width: 100%;' rows='6' disabled></textarea>
+
+    <script>
+        const output = document.getElementById("output");
+        const code = document.getElementById("code");
+    
+        function addToOutput(s) {
+          output.value += '>>>' + code.value + '\n' + s + '\n';
+        }
+    
+        output.value = 'Initializing...\n';
+        // init pyodide
+        languagePluginLoader.then(() => { output.value += 'Ready!\n'; });
+    
+        function evaluatePython() {
+          pyodide.runPythonAsync(code.value)
+            .then(output => addToOutput(output))
+            .catch((err) => { addToOutput(err) });
+        }
+      </script>
 {% endblock %}

@@ -12,7 +12,6 @@ bp = Blueprint(
 
 
 @bp.route("/", methods=["GET"])
-@login_required()
 def home():
     return render_template("home.html")
 
