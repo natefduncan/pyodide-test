@@ -8,6 +8,6 @@ black
 cssmin==0.2.0
 jsmin==2.2.2
 argon2-cffi==19.2.0
-pyjwt==1.7.1
+pyjwt==2.4.0
 pymysql==0.9.3
 python-dotenv==0.14.0
